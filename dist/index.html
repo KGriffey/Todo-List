@@ -7,6 +7,65 @@
     <title>Todo List</title>
 </head>
 <body>
+    <header>
+        <h1>TODO-ER</h1>
+    </header>
+    <main>
+        <div class="sidebar">
+            <h2 class="project-header">LISTS</h2>
+            <nav class="project-nav">
+                <ul class="project-list">
+                    <!--
+                    <li class="project" id="1">
+                        <h3>Project 1</h3>
+                    </li>
+                    <li class="project" id="2">
+                        <h3>Project 2</h3>
+                    </li>
+                    -->
+                </ul>    
+            </nav>
+            <button class="new" id="new-project"></button>
+        </div>
+        <div class="content">
+            <div class="ss-bar">
+                <input type="search" id="todo-search" name="todo-search" placeholder="Search todos..." aria-label="Search through the todo list">
+                <select name="sort" class="sort" id="todo-sort">
+                    <option value="">Sort by</option>
+                    <option value="az-ascending">Name (Ascending)</option>
+                    <option value="az-descending">Name (Descending)</option>
+                    <option value="date-ascending">Date (Ascending)</option>
+                    <option value="date-descending">Date (Descending)</option>
+                    <option value="cat-ascending">Category (Ascending)</option>
+                    <option value="cat-descending">Category (Descending)</option>
+                </select>
+            </div>
+            <ul class="todo-list">
+                <!--
+                <li class="todo" id="1">
+                    <div class="info">
+                        <input type="checkbox">
+                        <h4 class="title">title 1</h4>
+                        <p class="date">date 1</p>
+                        <p class="category">low</p>
+                    </div>
+                    <p class="description open">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, sed.</p>
+                </li>
+                <li class="todo" id="2">
+                    <div class="info">
+                        <input type="checkbox">
+                        <h4 class="title">title 2</h4>
+                        <p class="date">date 2</p>
+                        <p class="category">medium</p>
+                    </div>
+                    <p class="description">Lorem ipsum dolor sit amet.</p>
+                </li>
+                -->
+            </ul>
+            <button class="new" id="new-todo"></button>
+        </div>
+    </main>
+    <footer>Copyright &copy 2021 Kyle Griffey</footer>
     <script src="bundle.js"></script>
 </body>
 </html>
