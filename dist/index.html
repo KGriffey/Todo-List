@@ -29,8 +29,8 @@
         </div>
         <div class="content">
             <div class="ss-bar">
-                <input type="search" id="todo-search" name="todo-search" placeholder="Search todos..." aria-label="Search through the todo list">
-                <select name="sort" class="sort" id="todo-sort">
+                <input type="search" id="search-todo" name="search-todo" placeholder="Search todos..." aria-label="Search through the todo list">
+                <select name="sort" class="sort" id="sort-todo">
                     <option value="">Sort by</option>
                     <option value="az-ascending">Name (Ascending)</option>
                     <option value="az-descending">Name (Descending)</option>
@@ -41,26 +41,35 @@
                 </select>
             </div>
             <ul class="todo-list">
-                <!--
                 <li class="todo" id="1">
-                    <div class="info">
+                    <div class="todo-info">
                         <input type="checkbox">
                         <h4 class="title">title 1</h4>
                         <p class="date">date 1</p>
                         <p class="category">low</p>
+                        <div class="buttons">
+                            <button class="edit"></button>
+                            <button class="delete"></button>
+                        </div>
                     </div>
-                    <p class="description open">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, sed.</p>
+                    <hr class="open">
+                    <p class="todo-description open">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, sed.</p>
                 </li>
                 <li class="todo" id="2">
-                    <div class="info">
+                    <div class="todo-info">
                         <input type="checkbox">
                         <h4 class="title">title 2</h4>
                         <p class="date">date 2</p>
                         <p class="category">medium</p>
+                        <div class="buttons">
+                            <button class="edit"></button>
+                            <button class="delete"></button>
+                        </div>
                     </div>
-                    <p class="description">Lorem ipsum dolor sit amet.</p>
+                    <hr>
+                    <p class="todo-description">Lorem ipsum dolor sit amet.</p>
                 </li>
-                -->
+                
             </ul>
             <button class="new" id="new-todo"></button>
         </div>

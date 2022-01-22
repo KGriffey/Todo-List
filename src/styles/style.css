@@ -20,6 +20,7 @@
     --fs-h6: 0.64rem;
     --fs-h7: var(--smallestFontSize);
 
+    --size-todo-btn: 1.5rem;
     --size-new-btn: 2rem;
 }
 
@@ -96,7 +97,11 @@ footer {
     outline: 1px solid black;
 }
 
-/* Common Buttons */
+/* Buttons */
+button {
+    cursor: pointer;
+}
+
 button.new {
     /* Button shape and size */
     width: var(--size-new-btn);
@@ -114,6 +119,25 @@ button.new:after {
     content: '\2795';
 }
 
+button.edit {
+    background-image: url('../images/edit.png');
+}
+
+button.delete {
+    background-image: url('../images/delete.png');
+}
+
+button.edit,
+button.delete {
+    /* Size the buttons */
+    width: var(--size-todo-btn);
+    aspect-ratio: 1;
+
+    /* Size and center the icons */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 /* Main */
 /* Sidebar */
 main {
@@ -173,7 +197,7 @@ input[type="search"] {
     background-position: right;
 }
 
-#todo-search { 
+#search-todo { 
     /* Center the search bar */
     margin-left: auto;
     margin-right: auto;
@@ -183,7 +207,7 @@ select.sort {
     /* future */
 }
 
-#todo-sort {
+#sort-todo {
     /* Add some margin from the right edge */
     margin-right: 2rem;
 }
@@ -201,27 +225,41 @@ select.sort {
     width: 80%;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 
     /* List appearance */
+    padding: 0.5rem;
     outline: 2px solid black;
 }
 
-.todo .info {
+.todo-info {
     /* Align the info */
     display: flex;
-    border-bottom: 2px solid black;
+    align-items: center;
     gap: 1rem;
 }
 
-.description {
+.todo .buttons {
+    /* Push buttons to the right */
+    margin-left: auto;
+}
+
+.todo-description {
     /* Size the description box */
     min-height: 20vh;
+
+    /* Default is not visible */
+    display: none;
+    visibility: hidden;
+}
+
+hr {
     display: none;
     visibility: hidden;
 }
 
 .open {
-    /* Make the description visible */
+    /* Make the description box visible */
     display: block;
     visibility: visible;
 }
