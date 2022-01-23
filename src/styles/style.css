@@ -15,10 +15,12 @@
     --fs-h1: 1.953rem;
     --fs-h2: 1.563rem;
     --fs-h3: 1.25rem;
-    --fs-h4: var(--baseFontSize);
-    --fs-h5: var(--smallFontSize);
+    --fs-h4: var(--fs-base);
+    --fs-h5: var(--fs-small);
     --fs-h6: 0.64rem;
-    --fs-h7: var(--smallestFontSize);
+    --fs-h7: var(--fs-x-small);
+
+    --fs-modal-exit: 1.5rem;
 
     --size-todo-btn: 1.5rem;
     --size-new-btn: 2rem;
@@ -74,6 +76,12 @@ h4 {
     font-size: var(--fs-h4);
 }
 
+input[type="text"],
+input[type="date"],
+select {
+    min-height: 2rem;
+}
+
 /* Header */
 header {
     /* Center and scale*/
@@ -91,7 +99,10 @@ header {
 footer {
     /* Center and fix to the bottom of the page */
     width: 100%;
-    text-align: center;
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     /*temp*/
     outline: 1px solid black;
@@ -138,6 +149,7 @@ button.delete {
     background-repeat: no-repeat;
     background-position: center;
 }
+
 /* Main */
 /* Sidebar */
 main {
@@ -258,8 +270,91 @@ hr {
     visibility: hidden;
 }
 
-.open {
+.todo-description--open {
     /* Make the description box visible */
     display: block;
     visibility: visible;
+}
+
+/* Modal */
+.modal-background {
+    /* Modal positioning */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    /* Modal background and visibility */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s;
+
+    /* Position modal contents */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-background--active {
+    /* Active modal */
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal {
+    /* Sizing */
+    width: clamp(20rem, 20%, 20%);
+    
+    /* Position contents */
+    position: relative;
+
+    /* Styling */
+    padding: 1rem;
+    border: 0.2rem solid black;
+    border-radius: 1rem;
+    background-color: lightgray;
+}
+
+.modal-header {
+    text-align: center;
+    font-size: var(--fs-h2);
+    margin-bottom: 2rem;
+}
+
+#form-addTodo {
+    /* Position contents */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+#form-description {
+    min-height: 10rem;
+    resize: none;
+}
+
+#form-submit {
+    padding: 0.5rem 0;
+}
+
+.modal-exit {
+    /* Position in top right corner */
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+
+    cursor: pointer;
+    font-weight: bold;
+    font-size: var(--fs-modal-exit);
 }

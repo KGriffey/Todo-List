@@ -14,18 +14,10 @@
         <div class="sidebar">
             <h2 class="project-header">LISTS</h2>
             <nav class="project-nav">
-                <ul class="project-list">
-                    <!--
-                    <li class="project" id="1">
-                        <h3>Project 1</h3>
-                    </li>
-                    <li class="project" id="2">
-                        <h3>Project 2</h3>
-                    </li>
-                    -->
-                </ul>    
+                <ul class="project-list"></ul>    
             </nav>
             <button class="new" id="new-project"></button>
+            <input type="text" id="new-project--name" name="new-project--name" placeholder="Project name..." autocomplete="off">
         </div>
         <div class="content">
             <div class="ss-bar">
@@ -40,38 +32,37 @@
                     <option value="cat-descending">Category (Descending)</option>
                 </select>
             </div>
-            <ul class="todo-list">
-                <li class="todo" id="1">
-                    <div class="todo-info">
-                        <input type="checkbox">
-                        <h4 class="title">title 1</h4>
-                        <p class="date">date 1</p>
-                        <p class="category">low</p>
-                        <div class="buttons">
-                            <button class="edit"></button>
-                            <button class="delete"></button>
-                        </div>
-                    </div>
-                    <hr class="open">
-                    <p class="todo-description open">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, sed.</p>
-                </li>
-                <li class="todo" id="2">
-                    <div class="todo-info">
-                        <input type="checkbox">
-                        <h4 class="title">title 2</h4>
-                        <p class="date">date 2</p>
-                        <p class="category">medium</p>
-                        <div class="buttons">
-                            <button class="edit"></button>
-                            <button class="delete"></button>
-                        </div>
-                    </div>
-                    <hr>
-                    <p class="todo-description">Lorem ipsum dolor sit amet.</p>
-                </li>
-                
-            </ul>
+            <ul class="todo-list"></ul>
             <button class="new" id="new-todo"></button>
+        </div>
+        <div class="modal-background">
+            <div class="modal" id="modal-addTodo">
+                <p class="modal-header">New Task</p>
+                <form id="form-addTodo" action="">
+                    <div class="form-field">
+                        <label for="form-name">Task name:</label>
+                        <input type="text" id="form-name" name="form-name" placeholder="Task name..." autocomplete="off" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="form-date">Due date:</label>
+                        <input type="date" id="form-date" name="form-date" autocomplete="off" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="form-category">Importance:</label>
+                        <select id="form-category" name="form-category" required>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="form-description">Description:</label>
+                        <textarea id="form-description" name="form-description" placeholder="Dear diary..." autocomplete="off"></textarea>
+                    </div>
+                    <input type="submit" id="form-submit" name="form-submit" value="Submit">
+                    <div class="modal-exit">X</div>
+                </form>
+            </div>
         </div>
     </main>
     <footer>Copyright &copy 2021 Kyle Griffey</footer>

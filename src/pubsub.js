@@ -35,3 +35,5 @@ const events = (function() {
     };
 
 })();
+
+export { events }
