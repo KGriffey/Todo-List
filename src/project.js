@@ -1,28 +1,43 @@
+import { events } from "./pubsub.js";
+import { Task } from './task.js';
+
 /* Project Factory */
-const Project = (name) => {
-    // //cache the DOM elements
-    // const _gameboardSquares = document.querySelectorAll('.square');
+export const Project = (name) => {
+    'use strict';
+    
+    const tasks = [];
 
-    // //bind events
-    // for (const square of _gameboardSquares) {
-    //     square.addEventListener("click", _move);
-    // };
+    function getName() {
+        return name;
+    }
 
-    // //Emit the player's move as array: [row, column]
-    // function _move(e) {
-    //     events.emit('playerMoved', [parseInt(e.target.getAttribute('data-row')), parseInt(e.target.getAttribute('data-column'))]);
-    // }
+    function setName(newName) {
+        name = newName;
+    }
 
-    // function getName() {
-    //     return name;
-    // }
+    function addTask(name, date, category, description) {
+        const newTask = Task(name, date, category, description);
+        tasks.push(newTask);
+    }
 
-    // function getToken() {
-    //     return token;
-    // }
+    function deleteTask(index) {
+        tasks.splice(index,1);
+    }
 
-    // return {
-    //     getName: getName,
-    //     getToken: getToken
-    // };
+    function getTasks() {
+        return tasks;
+    }
+
+    function setTasks(newTasks) {
+        tasks = newTasks;
+    }
+
+    return {
+        getName: getName,
+        setName: setName,
+        addTask: addTask,
+        deleteTask: deleteTask,
+        getTasks: getTasks,
+        setTasks: setTasks,
+    };
 };

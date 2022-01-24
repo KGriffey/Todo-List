@@ -1,28 +1,35 @@
-/* Todo Factory */
-const Todo = (name) => {
-    // //cache the DOM elements
-    // const _gameboardSquares = document.querySelectorAll('.square');
+import { events } from './pubsub.js';
 
-    // //bind events
-    // for (const square of _gameboardSquares) {
-    //     square.addEventListener("click", _move);
-    // };
+/* Task Factory */
+const Task = (name, date, category, description) => {
+    'use strict';
 
-    // //Emit the player's move as array: [row, column]
-    // function _move(e) {
-    //     events.emit('playerMoved', [parseInt(e.target.getAttribute('data-row')), parseInt(e.target.getAttribute('data-column'))]);
-    // }
+    function update(newName, newDate, newCategory, newDescription) {
+        _setName(newName);
+        _setDate(newDate);
+        _setCategory(newCategory);
+        _setDescription(newDescription);
+    }
 
-    // function getName() {
-    //     return name;
-    // }
+    function _setName(newName) {
+        name = newName;
+    }
 
-    // function getToken() {
-    //     return token;
-    // }
+    function _setDate(newDate) {
+        date = newDate;
+    }
 
-    // return {
-    //     getName: getName,
-    //     getToken: getToken
-    // };
+    function _setCategory(newCategory) {
+        category = newCategory;
+    }
+
+    function _setDescription(newDescription) {
+        description = newDescription;
+    }
+
+    return {
+        update: update,
+    };
 };
+
+export { Task };

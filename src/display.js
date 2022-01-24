@@ -1,26 +1,47 @@
 import { events } from './pubsub.js';
+import { myProjects } from './global.js';
 
 /* Display Module */
 const display = (() => {
     'use strict';
 
     // Cache the DOM
-    const addTaskBtn = document.getElementById('new-todo');
+    const addTaskBtn = document.getElementById('new-task');
     const exitModalBtn = document.querySelector('.modal-exit');
     const modalBackground = document.querySelector('.modal-background');
 
     const projectList = document.querySelector('.project-list');
     const newProjectBtn = document.getElementById('new-project');
     const newProjectName = document.getElementById('new-project--name');
-    const todoList = document.querySelector('.todo-list');
-    const form = document.getElementById('form-addTodo');
+    const taskList = document.querySelector('.task-list');
+    const form = document.getElementById('form-addTask');
 
     // Bind events
     function initEventListeners() {
+        projectList.addEventListener('click', _changeProject);
         newProjectBtn.addEventListener('click', _addProject);
         addTaskBtn.addEventListener('click', _openModal);
         exitModalBtn.addEventListener('click', _exitModal);
-        form.addEventListener('submit', _addTask);
+        form.addEventListener('submit', function(e) {
+            // Prevent submit from reloading browser, parse the form data
+            e.preventDefault();
+            const formData = _readFormData();
+
+            // Display the new task
+            _addTask(...formData);
+
+            // Emit task added
+            events.emit('taskAdded', ...formData);
+
+            // Exit the modal
+            _exitModal(e);
+        });
+    }
+
+    function _changeProject(e) {
+        if (e.target && e.target.closest('li.project')) {
+            // events.emit('projectChanged', e.target.textContent);
+        }
     }
 
     function _openModal(e) {
@@ -32,8 +53,8 @@ const display = (() => {
     }
 
     function _exitModal(e) {
-        // Exit the modal if clicked outside or or using the exit button
-        if (!e.target.closest('.modal') || e.target === exitModalBtn || e.target === form) {
+        // Exit the modal if clicked outside, using the exit button, or submitted
+        if (!e.target.closest('.modal') || e.target === exitModalBtn || e.type === 'submit') {
             modalBackground.classList.remove('modal-background--active');
             document.removeEventListener('click', _exitModal);
         }
@@ -59,62 +80,59 @@ const display = (() => {
             newProjectText.textContent = newProjectName.value;
             newProject.appendChild(newProjectText);
             projectList.appendChild(newProject);
+
+            // Emit task added
+            events.emit('projectAdded', newProjectName.value);
         }
     }
 
-    function _addTask(e) {
-        // Prevent submit from reloading browser
-        e.preventDefault();
-
-        const formData = _readFormData();
+    function _addTask(name, date, category, description) {
         const newTask = document.createElement('li');
-        newTask.classList.add('todo');
+        newTask.classList.add('task');
 
-        const todoInfo = document.createElement('div');
-        todoInfo.classList.add('todo-info');
+        const taskInfo = document.createElement('div');
+        taskInfo.classList.add('task-info');
 
-        const todoCheckbox = document.createElement('input');
-        todoCheckbox.setAttribute('type', 'checkbox');
+        const taskCheckbox = document.createElement('input');
+        taskCheckbox.setAttribute('type', 'checkbox');
 
-        const todoName = document.createElement('h4');
-        todoName.classList.add('name');
-        todoName.textContent = formData[0];
+        const taskName = document.createElement('h4');
+        taskName.classList.add('name');
+        taskName.textContent = name;
 
-        const todoDate = document.createElement('p');
-        todoDate.classList.add('date');
-        todoDate.textContent = formData[1];
+        const taskDate = document.createElement('p');
+        taskDate.classList.add('date');
+        taskDate.textContent = date;
 
-        const todoCategory = document.createElement('p');
-        todoCategory.classList.add('category');
-        todoCategory.textContent = formData[2];
+        const taskCategory = document.createElement('p');
+        taskCategory.classList.add('category');
+        taskCategory.textContent = category;
 
-        const todoBtns = document.createElement('div');
-        todoBtns.classList.add('buttons');
+        const taskBtns = document.createElement('div');
+        taskBtns.classList.add('buttons');
         const editBtn = document.createElement('button');
         editBtn.classList.add('edit');
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete');
-        todoBtns.appendChild(editBtn);
-        todoBtns.appendChild(deleteBtn);
+        taskBtns.appendChild(editBtn);
+        taskBtns.appendChild(deleteBtn);
 
-        todoInfo.appendChild(todoCheckbox);
-        todoInfo.appendChild(todoName);
-        todoInfo.appendChild(todoDate);
-        todoInfo.appendChild(todoCategory);
-        todoInfo.appendChild(todoBtns);
+        taskInfo.appendChild(taskCheckbox);
+        taskInfo.appendChild(taskName);
+        taskInfo.appendChild(taskDate);
+        taskInfo.appendChild(taskCategory);
+        taskInfo.appendChild(taskBtns);
 
-        const todoBreak = document.createElement('hr');
-        const todoDescription = document.createElement('p');
-        todoDescription.classList.add('todo-description');
-        todoDescription.textContent = formData[3];
+        const taskBreak = document.createElement('hr');
+        const taskDescription = document.createElement('p');
+        taskDescription.classList.add('task-description');
+        taskDescription.textContent = description;
 
-        newTask.appendChild(todoInfo);
-        newTask.appendChild(todoBreak);
-        newTask.appendChild(todoDescription);
+        newTask.appendChild(taskInfo);
+        newTask.appendChild(taskBreak);
+        newTask.appendChild(taskDescription);
 
-        todoList.appendChild(newTask);
-
-        _exitModal(e);
+        taskList.appendChild(newTask);
     }
 
     return {
