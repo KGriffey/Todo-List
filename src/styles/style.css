@@ -22,7 +22,7 @@
 
     --fs-modal-exit: 1.5rem;
 
-    --size-todo-btn: 1.5rem;
+    --size-task-btn: 1.5rem;
     --size-new-btn: 2rem;
 }
 
@@ -141,7 +141,7 @@ button.delete {
 button.edit,
 button.delete {
     /* Size the buttons */
-    width: var(--size-todo-btn);
+    width: var(--size-task-btn);
     aspect-ratio: 1;
 
     /* Size and center the icons */
@@ -209,7 +209,7 @@ input[type="search"] {
     background-position: right;
 }
 
-#search-todo { 
+#search-task { 
     /* Center the search bar */
     margin-left: auto;
     margin-right: auto;
@@ -219,20 +219,20 @@ select.sort {
     /* future */
 }
 
-#sort-todo {
+#sort-task {
     /* Add some margin from the right edge */
     margin-right: 2rem;
 }
 
-.todo-list {
-    /* Align the todo items */
+.task-list {
+    /* Align the task items */
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
 }
 
-.todo {
+.task {
     /* Set width and split the info/description rows */
     width: 80%;
     display: flex;
@@ -244,19 +244,19 @@ select.sort {
     outline: 2px solid black;
 }
 
-.todo-info {
+.task-info {
     /* Align the info */
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.todo .buttons {
+.task .buttons {
     /* Push buttons to the right */
     margin-left: auto;
 }
 
-.todo-description {
+.task-description {
     /* Size the description box */
     min-height: 20vh;
 
@@ -270,7 +270,7 @@ hr {
     visibility: hidden;
 }
 
-.todo-description--open {
+.task-description--open {
     /* Make the description box visible */
     display: block;
     visibility: visible;
@@ -324,7 +324,7 @@ hr {
     margin-bottom: 2rem;
 }
 
-#form-addTodo {
+#form-addTask {
     /* Position contents */
     width: 100%;
     display: flex;

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
+    <title>Task List</title>
 </head>
 <body>
     <header>
@@ -21,8 +21,8 @@
         </div>
         <div class="content">
             <div class="ss-bar">
-                <input type="search" id="search-todo" name="search-todo" placeholder="Search todos..." aria-label="Search through the todo list">
-                <select name="sort" class="sort" id="sort-todo">
+                <input type="search" id="search-task" name="search-task" placeholder="Search tasks..." aria-label="Search through the task list">
+                <select name="sort" class="sort" id="sort-task">
                     <option value="">Sort by</option>
                     <option value="az-ascending">Name (Ascending)</option>
                     <option value="az-descending">Name (Descending)</option>
@@ -32,13 +32,13 @@
                     <option value="cat-descending">Category (Descending)</option>
                 </select>
             </div>
-            <ul class="todo-list"></ul>
-            <button class="new" id="new-todo"></button>
+            <ul class="task-list"></ul>
+            <button class="new" id="new-task"></button>
         </div>
         <div class="modal-background">
-            <div class="modal" id="modal-addTodo">
+            <div class="modal" id="modal-addTask">
                 <p class="modal-header">New Task</p>
-                <form id="form-addTodo" action="">
+                <form id="form-addTask" action="">
                     <div class="form-field">
                         <label for="form-name">Task name:</label>
                         <input type="text" id="form-name" name="form-name" placeholder="Task name..." autocomplete="off" required>
