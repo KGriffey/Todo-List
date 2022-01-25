@@ -1,5 +1,6 @@
 import { events } from './pubsub.js';
-import { myProjects } from './global.js';
+import { Task } from './task.js';
+import { Project } from './project.js';
 
 /* Display Module */
 const display = (() => {
@@ -11,36 +12,33 @@ const display = (() => {
     const modalBackground = document.querySelector('.modal-background');
 
     const projectList = document.querySelector('.project-list');
-    const newProjectBtn = document.getElementById('new-project');
-    const newProjectName = document.getElementById('new-project--name');
     const taskList = document.querySelector('.task-list');
-    const form = document.getElementById('form-addTask');
 
-    // Bind events
-    function initEventListeners() {
-        projectList.addEventListener('click', _changeProject);
-        newProjectBtn.addEventListener('click', _addProject);
-        addTaskBtn.addEventListener('click', _openModal);
-        exitModalBtn.addEventListener('click', _exitModal);
-        form.addEventListener('submit', function(e) {
-            // Prevent submit from reloading browser, parse the form data
-            e.preventDefault();
-            const formData = _readFormData();
+    events.on('projectAdded', _addProject);
+    // events.on('projectDeleted', _displayProjects);
+    events.on('projectChanged', _displayTasks);
+    events.on('taskAdded', _addTask);
+    events.on('taskDeleted', _displayTasks)
 
-            // Display the new task
-            _addTask(...formData);
+    addTaskBtn.addEventListener('click', _openModal);
+    exitModalBtn.addEventListener('click', _exitModal);
 
-            // Emit task added
-            events.emit('taskAdded', ...formData);
-
-            // Exit the modal
-            _exitModal(e);
-        });
+    function _clearTasks() {
+        while (taskList.firstChild) {
+            taskList.removeChild(taskList.firstChild);
+        }
     }
 
-    function _changeProject(e) {
-        if (e.target && e.target.closest('li.project')) {
-            // events.emit('projectChanged', e.target.textContent);
+    // function _displayProjects(projects) {
+    //     for (let i = 0; i < projects.length; i++) {
+    //         _addProject(projects[i]);
+    //     }
+    // }
+
+    function _displayTasks(Project) {
+        _clearTasks();
+        for (let i = 0; i < Project.getTasks().length; i++) {
+            _addTask(Project.getTasks()[i]);
         }
     }
 
@@ -60,33 +58,18 @@ const display = (() => {
         }
     }
 
-    function _readFormData() {
-        // Get all the form field data
-        const name = form.elements['form-name'].value;
-        const date = form.elements['form-date'].value;
-        const category = form.elements['form-category'].value;
-        const description = form.elements['form-description'].value;
-        
-        return [name, date, category, description];
+    function _addProject(Project) {
+        // Create the project list item, add the name, and append to DOM
+        const newProject = document.createElement('li');
+        newProject.classList.add('project');
+        const newProjectText = document.createElement('h3');
+        newProjectText.classList.add('project-name');
+        newProjectText.textContent = Project.getName();
+        newProject.appendChild(newProjectText);
+        projectList.appendChild(newProject);
     }
 
-    function _addProject() {
-        // Add a method here to check for empty field or name already used
-        if (newProjectName.value !== '') {
-            // Create the project list item, add the name, and append to DOM
-            const newProject = document.createElement('li');
-            newProject.classList.add('project');
-            const newProjectText = document.createElement('h3');
-            newProjectText.textContent = newProjectName.value;
-            newProject.appendChild(newProjectText);
-            projectList.appendChild(newProject);
-
-            // Emit task added
-            events.emit('projectAdded', newProjectName.value);
-        }
-    }
-
-    function _addTask(name, date, category, description) {
+    function _addTask(Task) {
         const newTask = document.createElement('li');
         newTask.classList.add('task');
 
@@ -98,15 +81,15 @@ const display = (() => {
 
         const taskName = document.createElement('h4');
         taskName.classList.add('name');
-        taskName.textContent = name;
+        taskName.textContent = Task.getName();
 
         const taskDate = document.createElement('p');
         taskDate.classList.add('date');
-        taskDate.textContent = date;
+        taskDate.textContent = Task.getDate();
 
         const taskCategory = document.createElement('p');
         taskCategory.classList.add('category');
-        taskCategory.textContent = category;
+        taskCategory.textContent = Task.getCategory();
 
         const taskBtns = document.createElement('div');
         taskBtns.classList.add('buttons');
@@ -126,18 +109,18 @@ const display = (() => {
         const taskBreak = document.createElement('hr');
         const taskDescription = document.createElement('p');
         taskDescription.classList.add('task-description');
-        taskDescription.textContent = description;
+        taskDescription.textContent = Task.getDescription();
 
         newTask.appendChild(taskInfo);
         newTask.appendChild(taskBreak);
         newTask.appendChild(taskDescription);
 
         taskList.appendChild(newTask);
+
+        modalBackground.classList.remove('modal-background--active');
     }
 
     return {
-        initEventListeners: initEventListeners,
+
     };
 })();
-
-export { display };

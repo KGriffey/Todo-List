@@ -15,20 +15,40 @@ const Task = (name, date, category, description) => {
         name = newName;
     }
 
+    function getName() {
+        return name;
+    }
+
     function _setDate(newDate) {
         date = newDate;
+    }
+
+    function getDate() {
+        return date;
     }
 
     function _setCategory(newCategory) {
         category = newCategory;
     }
 
+    function getCategory() {
+        return category;
+    }
+
     function _setDescription(newDescription) {
         description = newDescription;
     }
 
+    function getDescription() {
+        return description;
+    }
+
     return {
         update: update,
+        getName: getName,
+        getDate: getDate,
+        getCategory: getCategory,
+        getDescription: getDescription
     };
 };
 

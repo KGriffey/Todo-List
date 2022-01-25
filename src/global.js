@@ -1,5 +1,5 @@
 import { Project } from './project.js';
 
-const myProjects = [];
+const projects = [Project('My Project'), Project('My  Other Project')];
 
-export { myProjects };
+export { projects };

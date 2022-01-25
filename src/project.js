@@ -2,10 +2,10 @@ import { events } from "./pubsub.js";
 import { Task } from './task.js';
 
 /* Project Factory */
-export const Project = (name) => {
+const Project = (name) => {
     'use strict';
     
-    const tasks = [];
+    let tasks = [];
 
     function getName() {
         return name;
@@ -15,13 +15,12 @@ export const Project = (name) => {
         name = newName;
     }
 
-    function addTask(name, date, category, description) {
-        const newTask = Task(name, date, category, description);
+    function addTask(newTask) {
         tasks.push(newTask);
     }
 
-    function deleteTask(index) {
-        tasks.splice(index,1);
+    function deleteTask(name) {
+        tasks = tasks.filter(task => task.getName() !== name);
     }
 
     function getTasks() {
@@ -41,3 +40,5 @@ export const Project = (name) => {
         setTasks: setTasks,
     };
 };
+
+export { Project };

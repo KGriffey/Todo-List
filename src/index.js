@@ -1,7 +1,7 @@
 import './styles/style.css';
 import { format } from 'date-fns';
-import { display } from './display.js';
+import { projects } from './global.js';
 import { controller } from './controller.js';
-import { myProjects } from './global.js';
+import { display } from './display.js';
 
-display.initEventListeners();
+controller.init();
