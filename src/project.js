@@ -19,16 +19,16 @@ const Project = (name) => {
         tasks.push(newTask);
     }
 
-    function deleteTask(name) {
-        tasks = tasks.filter(task => task.getName() !== name);
+    function deleteTask(id) {
+        tasks = tasks.filter(task => task.getID() != id);
+    }
+
+    function getTask(id) {
+        return tasks.find(task => task.getID() == id);
     }
 
     function getTasks() {
         return tasks;
-    }
-
-    function setTasks(newTasks) {
-        tasks = newTasks;
     }
 
     return {
@@ -36,8 +36,8 @@ const Project = (name) => {
         setName: setName,
         addTask: addTask,
         deleteTask: deleteTask,
+        getTask: getTask,
         getTasks: getTasks,
-        setTasks: setTasks,
     };
 };
 

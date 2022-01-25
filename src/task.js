@@ -4,11 +4,26 @@ import { events } from './pubsub.js';
 const Task = (name, date, category, description) => {
     'use strict';
 
+    const id = Date.now();
+    let complete = false;
+
     function update(newName, newDate, newCategory, newDescription) {
         _setName(newName);
         _setDate(newDate);
         _setCategory(newCategory);
         _setDescription(newDescription);
+    }
+
+    function isComplete() {
+        return complete;
+    }
+
+    function toggleComplete() {
+        complete = !complete;
+    }
+
+    function getID() {
+        return id;
     }
 
     function _setName(newName) {
@@ -44,6 +59,9 @@ const Task = (name, date, category, description) => {
     }
 
     return {
+        isComplete: isComplete,
+        toggleComplete: toggleComplete,
+        getID: getID,
         update: update,
         getName: getName,
         getDate: getDate,
